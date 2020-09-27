@@ -153,5 +153,8 @@
       }
     }
   },
-  "defaultProject": "online-store"
+  "defaultProject": "online-store",
+  "cli": {
+    "defaultCollection": "@datorama/akita"
+  }
 }
