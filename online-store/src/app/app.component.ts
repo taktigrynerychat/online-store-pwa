@@ -9,6 +9,6 @@ import { SkusService } from './services/api/skus.service';
 export class AppComponent {
   constructor(private s: SkusService) {
   }
-  skus = this.s.getFilteredSkus();
+  sku = this.s.getAll();
   title = 'online-store';
 }
