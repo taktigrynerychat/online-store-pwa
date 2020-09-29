@@ -14,8 +14,9 @@ export class ApiService {
   }
 
   /*
-      Method sends request to the specified endpoint
-     * @param requestData  Endpoint Metadata.
+     * Method sends request to the specified endpoint;
+     * <T> - Response type, <K> - Body keys type (keys which we are using to make a body).
+     * @param {RequestData}  Endpoint Metadata.
      * @param body    Request Body.
    */
   getResp<T, K = {}>(requestData: RequestData, paramKeys?: Array<keyof K>): Observable<HttpResponse<T>> {
