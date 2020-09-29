@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://ssdev.superagent.ru/TestApp/Values'
+  api: 'http://ssdev.superagent.ru/TestApp/'
 };

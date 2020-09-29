@@ -19,7 +19,7 @@ export class ApiService {
      * @param {RequestData}  Endpoint Metadata.
      * @param body    Request Body.
    */
-  getResp<T, K = {}>(requestData: RequestData, paramKeys?: Array<keyof K>): Observable<HttpResponse<T>> {
+  getResponse<T, K = {}>(requestData: RequestData, paramKeys?: Array<keyof K>): Observable<HttpResponse<T>> {
     const body = {};
     paramKeys && paramKeys.forEach(key => {
       body[key as string] = requestData[key];

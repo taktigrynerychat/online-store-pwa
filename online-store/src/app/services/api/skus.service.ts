@@ -31,22 +31,22 @@ export class SkusService extends SkusServiceAbstract {
 
   @RequestMapping(apiEndpoints.getAll)
   getAll(requestData: RequestData = {}): Observable<Sku[]> {
-    return this.http.getResp<Sku[]>(requestData).pipe(map(r => r.body));
+    return this.http.getResponse<Sku[]>(requestData).pipe(map(r => r.body));
   }
 
   @RequestMapping(apiEndpoints.getFiltered)
   getFilteredSkus(requestData: RequestData<SkuFilter>): Observable<Sku[]> {
-    return this.http.getResp<Sku[], SkuFilter>(requestData, requestData.paramKeys).pipe(map(r => r.body));
+    return this.http.getResponse<Sku[], SkuFilter>(requestData, requestData.paramKeys).pipe(map(r => r.body));
   }
 
   @RequestMapping(apiEndpoints.getById)
   getSkuById(requestData: RequestData<{ id: ID }>): Observable<Sku> {
-    return this.http.getResp<Sku>(requestData).pipe(map(r => r.body));
+    return this.http.getResponse<Sku>(requestData).pipe(map(r => r.body));
   }
 
   @RequestMapping(apiEndpoints.update)
   updateSku(requestData: RequestData<SkuUpdate>): Observable<number> {
-    return this.http.getResp<Sku, SkuUpdate>(requestData, ['name', 'price']).pipe(map(r => r.status));
+    return this.http.getResponse<Sku, SkuUpdate>(requestData, ['name', 'price']).pipe(map(r => r.status));
   }
 
 }
