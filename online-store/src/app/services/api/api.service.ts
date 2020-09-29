@@ -21,7 +21,7 @@ export class ApiService {
    */
   getResp<T, K = {}>(requestData: RequestData, paramKeys?: Array<keyof K>): Observable<HttpResponse<T>> {
     const body = {};
-    paramKeys.forEach(key => {
+    paramKeys && paramKeys.forEach(key => {
       body[key as string] = requestData[key];
     });
 

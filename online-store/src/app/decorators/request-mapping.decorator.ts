@@ -5,7 +5,6 @@ export function RequestMapping(rest?: EndpointMetadata): any {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(...args: any[]): any {
-      console.log('args', args[0]);
       return originalMethod.apply(
         this,
         [
@@ -34,6 +33,5 @@ export function resolveUrlPath(path: string, params: any): string {
     .forEach(param => {
       path = path.replace(`{${ param }}`, params[param]);
     });
-  console.log('resolve');
   return path;
 }
