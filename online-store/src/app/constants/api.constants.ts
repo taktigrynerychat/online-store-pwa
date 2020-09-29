@@ -1,4 +1,3 @@
-import { A } from '@angular/cdk/keycodes';
 import { Endpoints } from '../models/api.model';
 
 export enum SkusEndpoints {
@@ -10,8 +9,7 @@ export enum SkusEndpoints {
 
 export enum ApiMethods {
   GET = 'GET',
-  POST = 'POST',
-  UPDATE = 'UPDATE'
+  POST = 'POST'
 }
 
 
