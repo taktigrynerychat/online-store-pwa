@@ -5,7 +5,7 @@ USER STORY:
 
 Details:
 
-API: https://ssdev.superagent.ru/TestApp/swagger/#/Values
+API: http://ssdev.superagent.ru/TestApp/swagger/#/Values
 
 Done Criteria:
 
