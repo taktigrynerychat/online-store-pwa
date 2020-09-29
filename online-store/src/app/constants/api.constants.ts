@@ -27,9 +27,11 @@ export const apiEndpoints: Endpoints = {
   getById: {
     path: SkusEndpoints.GET_BY_ID,
     method: ApiMethods.GET,
+    resolveUrl: true,
   },
   update: {
     path: SkusEndpoints.UPDATE,
     method: ApiMethods.POST,
+    resolveUrl: true,
   }
 };

@@ -11,6 +11,6 @@ export class AppComponent {
   }
 
   sku = this.s.getFilteredSkus({lastChange: new Date()});
-  lol = this.s.updateSku(1, {name: 'lol', price: 2111});
+  lol = this.s.updateSku({name: 'lol3323', price: 2211});
   title = 'online-store';
 }

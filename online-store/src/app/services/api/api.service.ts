@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { EndpointMetadata, ReqOpt, RequestOptions } from '../../models/api.model';
+import { EndpointMetadata, ReqOpt, RequestData } from '../../models/api.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,24 +15,19 @@ export class ApiService {
 
   /*
       Method sends request to the specified endpoint
-     * @param endpoint  Endpoint Metadata.
+     * @param requestData  Endpoint Metadata.
      * @param body    Request Body.
    */
-  getResponse<T = any>(endpoint: EndpointMetadata, options?: ReqOpt): Observable<HttpResponse<T>> {
-    const opt = new RequestOptions(
-      `${ environment.api }/${ endpoint.path }`,
-      {
-        query: options?.query,
-        body: options?.body,
-        headers: options?.headers,
-      });
+  getResp<T, K = {}>(requestData: RequestData, paramKeys?: Array<keyof K>): Observable<HttpResponse<T>> {
+    const body = {};
+    paramKeys.forEach(key => {
+      body[key as string] = requestData[key];
+    });
+
     const req = new HttpRequest(
-      endpoint.method,
-      opt.url,
-      opt.body,
-      {
-        headers: options?.headers,
-      },
+      requestData.method,
+      `${ environment.api }${ requestData.path }`,
+      body,
     );
 
     return this.http.request<T>(req)

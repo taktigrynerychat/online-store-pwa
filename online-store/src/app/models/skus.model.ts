@@ -14,10 +14,11 @@ export interface SkuParent {
 }
 
 export interface SkuFilter {
-  lastChange?: Date;
+  lastChange: Date;
 }
 
 export interface SkuUpdate {
+  id?: ID;
   name?: string;
   price?: number;
 }

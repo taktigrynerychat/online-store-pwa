@@ -5,8 +5,14 @@ export type EndpointMethod = 'GET' | 'POST' | 'UPDATE';
 
 /* Endpoint metadata. Contains relative path and request type */
 export interface EndpointMetadata {
+  path?: string;
+  method?: EndpointMethod;
+  resolveUrl?: boolean;
+}
+
+/* Controller metadata. Contains relative path  */
+export interface ControllerMetadata {
   path: string;
-  method: EndpointMethod;
 }
 
 /* Known endpoints enumeration */
@@ -28,34 +34,40 @@ export interface ReqOpt {
   headers?: HttpHeaders;
 }
 
-export class RequestOptions implements ReqOpt {
-  // tslint:disable-next-line:variable-name
-  private _url: string;
+export type RequestData<T = any> = T & {
+  path?: string;
+  method?: EndpointMethod;
+  paramKeys?: Array<keyof T>;
+};
 
-  body?: any;
-  query?: any;
-  headers?: HttpHeaders;
-
-  public set url(url: string) {
-    if (this.query) {
-      for (const key of Object.keys(this.query)) {
-        console.log([key, this.query[key]]);
-        url = url.replace(`{${ key }}`, this.query[key]);
-      }
-    }
-    console.log(url);
-    this._url = url;
-  }
-
-  public get url(): string {
-    return this._url;
-  }
-
-  constructor(url: string, options: ReqOpt) {
-    this.body = options.body;
-    this.query = options.query;
-    this.headers = options.headers;
-    this.url = url;
-  }
-
-}
+// export class RequestOptions implements ReqOpt {
+//   // tslint:disable-next-line:variable-name
+//   private _url: string;
+//
+//   body?: any;
+//   query?: any;
+//   headers?: HttpHeaders;
+//
+//   public set url(url: string) {
+//     if (this.query) {
+//       for (const key of Object.keys(this.query)) {
+//         console.log([key, this.query[key]]);
+//         url = url.replace(`{${ key }}`, this.query[key]);
+//       }
+//     }
+//     console.log(url);
+//     this._url = url;
+//   }
+//
+//   public get url(): string {
+//     return this._url;
+//   }
+//
+//   constructor(url: string, options: ReqOpt) {
+//     this.body = options.body;
+//     this.query = options.query;
+//     this.headers = options.headers;
+//     this.url = url;
+//   }
+//
+// }
