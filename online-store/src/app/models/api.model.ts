@@ -14,6 +14,7 @@ interface KnownEndpoints {
   getFiltered: EndpointMetadata;
   getById: EndpointMetadata;
   getAll: EndpointMetadata;
+  update: EndpointMetadata;
 }
 
 /* Endpoints interface. Each of the fields describes endpoint method metadata */

@@ -12,3 +12,12 @@ export interface SkuParent {
   readonly id: ID;
   readonly name: string;
 }
+
+export interface SkuFilter {
+  lastChange?: Date;
+}
+
+export interface SkuUpdate {
+  name?: string;
+  price?: number;
+}

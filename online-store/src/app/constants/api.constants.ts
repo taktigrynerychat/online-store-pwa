@@ -4,7 +4,8 @@ import { Endpoints } from '../models/api.model';
 export enum SkusEndpoints {
   GET_ALL = 'GetAll',
   GET_FILTERED = 'GetFiltered',
-  GET_BY_ID = 'GetById/{id}'
+  GET_BY_ID = 'GetById/{id}',
+  UPDATE = 'Update/{id}'
 }
 
 export enum ApiMethods {
@@ -26,5 +27,9 @@ export const apiEndpoints: Endpoints = {
   getById: {
     path: SkusEndpoints.GET_BY_ID,
     method: ApiMethods.GET,
+  },
+  update: {
+    path: SkusEndpoints.UPDATE,
+    method: ApiMethods.POST,
   }
 };
