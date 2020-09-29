@@ -1,6 +1,5 @@
-/* Endpoint request method */
-import { HttpHeaders } from '@angular/common/http';
 
+/* Endpoint request method */
 export type EndpointMethod = 'GET' | 'POST' | 'UPDATE';
 
 /* Endpoint metadata. Contains relative path and request type */
@@ -28,12 +27,7 @@ export interface Endpoints extends KnownEndpoints {
   [key: string]: EndpointMetadata;
 }
 
-export interface ReqOpt {
-  query?: any;
-  body?: any;
-  headers?: HttpHeaders;
-}
-
+/* Request metadata type */
 export type RequestData<T = any> = T & {
   path?: string;
   method?: EndpointMethod;

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { EndpointMetadata, ReqOpt, RequestData } from '../../models/api.model';
+import { RequestData } from '../../models/api.model';
 
 @Injectable({
   providedIn: 'root',
