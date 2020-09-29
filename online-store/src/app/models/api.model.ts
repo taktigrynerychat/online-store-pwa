@@ -5,6 +5,10 @@ export interface EndpointMetadata {
   method: EndpointMethod;
 }
 
-export interface Endpoints {
+interface KnownEndpoints {
+  getFiltered: EndpointMetadata;
+}
+
+export interface Endpoints extends KnownEndpoints{
   [key: string]: EndpointMetadata;
 }
