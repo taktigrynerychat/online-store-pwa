@@ -13,6 +13,11 @@ export class ApiService {
   constructor(private http: HttpClient) {
   }
 
+  /*
+      Method sends request to the specified endpoint
+     * @param endpoint  Endpoint Metadata.
+     * @param body    Request Body.
+   */
   getResponse<T = any>(endpoint: EndpointMetadata, body?: any): Observable<HttpResponse<T>> {
     const request = new HttpRequest(
       endpoint.method,
