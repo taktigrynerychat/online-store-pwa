@@ -5,6 +5,7 @@ export function RequestMapping(rest?: EndpointMetadata): any {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(...args: any[]): any {
+      console.log(args);
       return originalMethod.apply(
         this,
         [
@@ -15,7 +16,7 @@ export function RequestMapping(rest?: EndpointMetadata): any {
                 ? `${ this['REST'] }${ resolveUrlPath(rest.path, args[0]) }`
                 : `${ this['REST'] }${ rest.path }`,
               method: rest.method,
-              paramKeys: Object.keys(args[0])
+              paramKeys: args[0].paramKeys || Object.keys(args[0])
             }
             : {
               path: `${ this['REST'] }${ rest.path }`,

@@ -20,6 +20,8 @@ interface KnownEndpoints {
   getById: EndpointMetadata;
   getAll: EndpointMetadata;
   update: EndpointMetadata;
+  getWithParent: EndpointMetadata;
+  getParents: EndpointMetadata;
 }
 
 /* Endpoints interface. Each of the fields describes endpoint method metadata */

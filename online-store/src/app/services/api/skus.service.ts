@@ -6,17 +6,21 @@ import { apiEndpoints } from '../../constants/api.constants';
 import { Controller } from '../../decorators/controller.decorator';
 import { RequestMapping } from '../../decorators/request-mapping.decorator';
 import { RequestData } from '../../models/api.model';
-import { Sku, SkuFilter, SkuUpdate } from '../../models/skus.model';
+import { Sku, SkuFilter, SkuParent, SkusWithParent, SkuUpdate } from '../../models/skus.model';
 import { ApiService } from './api.service';
 
 export abstract class SkusServiceAbstract {
   abstract getAll(requestData?: RequestData): Observable<Sku[]>;
 
-  abstract getFilteredSkus(requestData: RequestData<SkuFilter>): Observable<Sku[]>;
+  abstract getFilteredSkus(requestData?: RequestData<SkuFilter>): Observable<Sku[]>;
 
   abstract getSkuById(requestData?: RequestData<{ id: ID }>): Observable<Sku>;
 
-  abstract updateSku(requestData: RequestData<SkuUpdate>): Observable<number>;
+  abstract updateSku(requestData?: RequestData<SkuUpdate>): Observable<number>;
+
+  abstract getParents(requestData?: RequestData): Observable<SkuParent[]>;
+
+  abstract getWithParent(requestData: RequestData): Observable<SkusWithParent[]>;
 }
 
 @Injectable()
@@ -47,6 +51,16 @@ export class SkusService extends SkusServiceAbstract {
   @RequestMapping(apiEndpoints.update)
   updateSku(requestData: RequestData<SkuUpdate>): Observable<number> {
     return this.http.getResponse<Sku, SkuUpdate>(requestData, ['name', 'price']).pipe(map(r => r.status));
+  }
+
+  @RequestMapping(apiEndpoints.getParents)
+  getParents(requestData: RequestData = {}): Observable<SkuParent[]> {
+    return this.http.getResponse<SkuParent[]>(requestData).pipe(map(r => r.body));
+  }
+
+  @RequestMapping(apiEndpoints.getWithParent)
+  getWithParent(requestData: RequestData = {}): Observable<SkusWithParent[]> {
+    return this.http.getResponse<SkusWithParent[]>(requestData).pipe(map(r => r.body));
   }
 
 }
