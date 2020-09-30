@@ -13,18 +13,33 @@
       font-size: 20px;
       color: @primary;
       position: relative;
+      cursor: pointer;
 
       &:before, &:after {
+        transition: 0.3s;
         content: attr(data-text);
         position: absolute;
         left: 0;
         color: lighten(@primary, 40);
       }
-      &:before{
+
+      &:before {
         top: 80%;
       }
-      &:after{
+
+      &:after {
         bottom: 80%;
+      }
+
+      &:hover {
+        &:before {
+          transform: translate(100%, 0);
+          opacity: 0;
+        }
+        &:after {
+          transform: translate(-100%, 0);
+          opacity: 0;
+        }
       }
     }
   }
