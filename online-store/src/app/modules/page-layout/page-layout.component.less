@@ -1,0 +1,22 @@
+:host {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-areas: 'header' 'content' 'footer';
+  grid-template-rows: 50px 1fr 20px;
+}
+
+.page {
+  &__header {
+    grid-area: header;
+  }
+
+  &__content {
+    grid-area: content;
+  }
+
+  &__footer {
+    grid-area: footer;
+  }
+
+}

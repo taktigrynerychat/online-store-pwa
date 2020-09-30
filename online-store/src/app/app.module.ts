@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
+import { PageLayoutModule } from './modules/page-layout/page-layout.module';
 import { SkusService } from './services/api/skus.service';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { SkusService } from './services/api/skus.service';
     environment.production ? [] : AkitaNgDevtools.forRoot(),
     AkitaNgRouterStoreModule.forRoot(),
     MatButtonModule,
+    PageLayoutModule
   ],
   providers: [SkusService],
   bootstrap: [AppComponent]
