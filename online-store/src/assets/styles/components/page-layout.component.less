@@ -1,0 +1,40 @@
+.page {
+  &__header {
+    grid-area: header;
+    display: flex;
+    padding: 10px 50px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-header {
+    &__logo {
+      font-family: sequel, @font-family;
+      font-size: 20px;
+      color: @primary;
+      position: relative;
+
+      &:before, &:after {
+        content: attr(data-text);
+        position: absolute;
+        left: 0;
+        color: lighten(@primary, 40);
+      }
+      &:before{
+        top: 80%;
+      }
+      &:after{
+        bottom: 80%;
+      }
+    }
+  }
+
+  &__content {
+    grid-area: content;
+  }
+
+  &__footer {
+    grid-area: footer;
+  }
+
+}

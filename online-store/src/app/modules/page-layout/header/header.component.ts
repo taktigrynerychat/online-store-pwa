@@ -3,12 +3,14 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 @Component({
   selector: 'lol-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  logo = 'store';
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
