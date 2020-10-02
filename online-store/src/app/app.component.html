@@ -1,5 +1,7 @@
 <lol-page-layout>
-  <section content>
-    <router-outlet></router-outlet>
+  <section class = "_page" content
+    [@routerTransition] = "_getState(outlet)"
+    [@.disabled] = "isFirstRoute$ | async">
+    <router-outlet #outlet="outlet"></router-outlet>
   </section>
 </lol-page-layout>

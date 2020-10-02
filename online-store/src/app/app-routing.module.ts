@@ -15,11 +15,17 @@ const routes: Routes = [
   {
     path: MainRoutes.MAIN_PAGE,
     loadChildren: () => import('./modules/main/main.module').then(module => module.MainModule),
+    data: {
+      state: MainRoutes.MAIN_PAGE
+    },
   },
   {
     path: MainRoutes.CART,
     loadChildren: () => import('./modules/cart/cart.module').then(module => module.CartModule),
-  }
+    data: {
+      state: MainRoutes.CART
+    },
+  },
 ];
 
 @NgModule({
