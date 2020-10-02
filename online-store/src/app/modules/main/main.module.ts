@@ -5,10 +5,11 @@ import { MatTableModule } from '@angular/material/table';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
+import { ItemsTableComponent } from './components/items-table/items-table.component';
 
 
 @NgModule({
-  declarations: [MainComponent],
+  declarations: [MainComponent, ItemsTableComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
