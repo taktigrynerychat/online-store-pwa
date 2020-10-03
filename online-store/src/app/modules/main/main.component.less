@@ -8,6 +8,29 @@
 .main {
   &__table {
     overflow: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex: 1 1 auto;
+
+    @media @mobile{
+      flex-direction: column;
+    }
+
+    &-config{
+      margin: 10px 0;
+      display: flex;
+      flex-basis: 40%;
+
+      @media @mobile {
+        flex: 1 0 auto;
+      }
+    }
+  }
+}
+
+.main {
+  &__table {
+    overflow: auto;
     display: flex;
     flex: 1 1 auto;
 

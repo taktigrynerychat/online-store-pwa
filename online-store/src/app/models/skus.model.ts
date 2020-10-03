@@ -6,7 +6,7 @@ export interface BasicSku {
   readonly price: number;
 }
 
-export interface Sku extends BasicSku{
+export interface Sku extends BasicSku {
   readonly lastChange: Date;
   readonly parent: SkuParent;
 }
@@ -14,6 +14,10 @@ export interface Sku extends BasicSku{
 export interface SkuParent {
   readonly id: ID;
   readonly name: string;
+}
+
+export interface SkuParentChip extends SkuParent {
+  selected: boolean;
 }
 
 export interface SkusWithParent {

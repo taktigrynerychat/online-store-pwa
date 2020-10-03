@@ -1,0 +1,10 @@
+<mat-chip-list
+  [selectable]="true"
+>
+  <mat-chip
+    *ngFor="let category of categories$ | async"
+    [selected]="category.selected"
+  >
+    {{ category.name }}
+  </mat-chip>
+</mat-chip-list>
