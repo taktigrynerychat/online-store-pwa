@@ -9,7 +9,7 @@ export const routerTransition: any = trigger('routerTransition', [
     group([
       query(':leave', [
         style({transform: 'translateX(0%)'}),
-        animate('0.2s cubic-bezier(0.4, 0.0, 1, 1)', style({transform: 'translateX(-300px)', opacity: 0}))
+        animate('0.1s cubic-bezier(0.4, 0.0, 1, 1)', style({transform: 'translateX(-300px)', opacity: 0}))
       ], {optional: true}),
       query(':enter', [
         style({transform: 'translateX(200px)'}),
