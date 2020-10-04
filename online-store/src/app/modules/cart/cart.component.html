@@ -1,5 +1,25 @@
-<section class = "page-card-wrapper">
+<section class="page-card-wrapper">
   <div class="page-card">
-    <pre style="overflow: auto">{{cartSkus$ | async | json}}</pre>
+    <div class="header">
+      <span class="header__text">cart</span>
+      <button
+        mat-flat-button
+        color="warn"
+        (click)="deleteAll()"
+      >Delete all
+      </button>
+    </div>
+    <div class="cart-wrapper" style="overflow: auto">
+      <div class="cart">
+        <div
+          class="cart__card cart-card"
+          *ngFor="let sku of cartSkus$ | async"
+        >
+          <span class = "cart-card__name">{{ sku.name }}</span>
+          <span class = "cart-card__price">{{ sku.price }}$</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>

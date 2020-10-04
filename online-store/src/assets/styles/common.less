@@ -2,7 +2,22 @@ a {
   text-decoration: none;
 }
 
-.custom-tooltip{
+.custom-tooltip {
   padding: 2px 3px;
   font-size: 10px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+
+  &__text {
+    text-transform: uppercase;
+    font-family: sequel, @font-family;
+    font-size: 30px;
+    color: transparent;
+    -webkit-text-stroke: 1px lighten(@primary, 40);
+  }
 }

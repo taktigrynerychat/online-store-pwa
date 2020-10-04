@@ -18,4 +18,8 @@ export class CartComponent {
     private cartQuery: CartQuery,
   ) {
   }
+
+  deleteAll(): void {
+    this.cartService.deleteAllSkusFromCart();
+  }
 }

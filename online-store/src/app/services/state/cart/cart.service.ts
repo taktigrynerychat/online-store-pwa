@@ -17,4 +17,8 @@ export class CartService {
   deleteSkuFromCart(id: ID): void {
     this.cartStore.remove(id);
   }
+
+  deleteAllSkusFromCart(): void {
+    this.cartStore.remove();
+  }
 }
