@@ -1,5 +1,7 @@
 <div class="example-container">
-  <ng-template #noDataFound>{{ noDataMessage }}</ng-template>
+  <ng-template #noDataFound>
+    <span class="no-data">{{ noDataMessage }}</span>
+  </ng-template>
   <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length; else noDataFound">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>

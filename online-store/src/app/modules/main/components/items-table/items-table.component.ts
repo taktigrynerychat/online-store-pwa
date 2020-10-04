@@ -35,7 +35,7 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsub))
       .subscribe(data => {
         this.dataSource = data;
-        this.noDataMessage = 'OOPS, No data was found :(';
+        this.noDataMessage = 'no data :(';
         this.cdr.markForCheck();
       });
   }
