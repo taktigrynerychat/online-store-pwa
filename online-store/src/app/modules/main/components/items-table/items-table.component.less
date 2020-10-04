@@ -14,8 +14,18 @@
   & .mat-table{
     width: 100%;
 
+    & .mat-cell:not(:first-child) {
+      max-width: 100px;
+      padding-right: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     & .mat-row:last-child .mat-cell{
       border-bottom: transparent;
     }
   }
 }
+
+

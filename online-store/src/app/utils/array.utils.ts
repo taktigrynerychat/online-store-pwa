@@ -5,3 +5,12 @@ export function removeItemFromArr(arr: any[], value: any): any[] {
   }
   return arr;
 }
+
+export function getChildValue(obj: any, keyString: string): any {
+  const keys = keyString.split('.');
+  let tmp;
+  keys.forEach(key => {
+    tmp = obj[key];
+  });
+  return tmp;
+}

@@ -1,6 +1,6 @@
 <div class="example-container">
   <ng-template #noDataFound>{{ noDataMessage }}</ng-template>
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table [dataSource]="dataSource" *ngIf="dataSource.data.length; else noDataFound">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -21,8 +21,11 @@
     <ng-container
       *ngFor="let column of columns"
       [matColumnDef]="column.key">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.title }}</th>
-      <td mat-cell *matCellDef="let element"> {{ column.parent? getParent(element[column.key], column.parent) : element[column.key]}} </td>
+      <th mat-header-cell *matHeaderCellDef>{{ column.title }}</th>
+      <td mat-cell *matCellDef="let element"
+        [matTooltip]="getCellContent(element[column.key], column)"
+        [matTooltipClass]="'custom-tooltip'">
+        {{ getCellContent(element[column.key], column) }} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="getTableKeys(); sticky: true"></tr>

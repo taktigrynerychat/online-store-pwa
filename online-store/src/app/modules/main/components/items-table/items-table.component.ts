@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
+import { DatePipe } from '@angular/common';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { SKUS_TABLE_COLUMNS } from '../../../../constants/table.constants';
 import { Sku } from '../../../../models/skus.model';
 import { DisplayedColumn } from '../../../../models/table.model';
 import { SkusStateQuery } from '../../../../services/state/skus/skus-state.query';
+import { getChildValue } from '../../../../utils/array.utils';
 
 @Component({
   selector: 'lol-items-table',
@@ -15,9 +16,8 @@ import { SkusStateQuery } from '../../../../services/state/skus/skus-state.query
   styleUrls: ['./items-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ItemsTableComponent implements OnInit, OnDestroy {
 
-  @ViewChild(MatSort) sort: MatSort;
   noDataMessage: string;
   columns: DisplayedColumn[] = SKUS_TABLE_COLUMNS;
   dataSource: MatTableDataSource<Sku> = new MatTableDataSource<Sku>([]);
@@ -26,7 +26,8 @@ export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
   private unsub: Subject<any> = new Subject<any>();
 
   constructor(private skusStateQuery: SkusStateQuery,
-              private cdr: ChangeDetectorRef) {
+              private cdr: ChangeDetectorRef,
+              private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
@@ -37,11 +38,6 @@ export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.noDataMessage = 'OOPS, No data was found :(';
         this.cdr.markForCheck();
       });
-  }
-
-  ngAfterViewInit(): void {
-    console.log(this.sort);
-    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
@@ -69,10 +65,6 @@ export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
     return `${ this.selection.isSelected(row) ? 'deselect' : 'select' } row ${ +row.id + 1 }`;
   }
 
-  sortChange(e: Sort): void{
-    console.log('sort change', e);
-  }
-
   getTableKeys(): string[] {
     return ['select', ...this.columns.map(column => column.key)];
   }
@@ -84,6 +76,16 @@ export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
       tmp = sku[key];
     });
     return tmp;
+  }
+
+  getCellContent(data: any, column: DisplayedColumn): any {
+    if (column.parent) {
+      return getChildValue(data, column.parent);
+    } else if (column.key === 'lastChange') {
+      return this.datePipe.transform(data, 'dd.MM.yyy hh:mm');
+    } else {
+      return data;
+    }
   }
 
 }

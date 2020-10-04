@@ -11,9 +11,11 @@ import { CategoriesQuery } from './categories.query';
 @Injectable({providedIn: 'root'})
 export class CategoriesService {
 
-  constructor(private categoriesStore: CategoriesStore,
-              private categoriesQuery: CategoriesQuery,
-              private skusApiService: SkusService) {
+  constructor(
+    private categoriesStore: CategoriesStore,
+    private categoriesQuery: CategoriesQuery,
+    private skusApiService: SkusService,
+  ) {
   }
 
   getCategories(): Observable<SkuParent[]> {

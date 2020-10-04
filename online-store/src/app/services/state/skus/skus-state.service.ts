@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Sku } from '../../../models/skus.model';
 import { SkusService } from '../../api/skus.service';
@@ -8,8 +8,10 @@ import { tap } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class SkusStateService {
 
-  constructor(private skusStateStore: SkusStateStore,
-              private skusService: SkusService) {
+  constructor(
+    private skusStateStore: SkusStateStore,
+    private skusService: SkusService,
+  ) {
   }
 
   getAll(): Observable<Sku[]> {

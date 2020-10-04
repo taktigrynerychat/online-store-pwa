@@ -4,6 +4,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './main.component';
@@ -20,6 +21,7 @@ import { ItemsTableConfigComponent } from './components/items-table-config/items
     MatCheckboxModule,
     MatChipsModule,
     MatSortModule,
+    MatTooltipModule,
   ],
 })
 export class MainModule { }
