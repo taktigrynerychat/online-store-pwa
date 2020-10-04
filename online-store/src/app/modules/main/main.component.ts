@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { CartService } from '../../services/state/cart/cart.service';
 import { CategoriesQuery } from '../../services/state/categories/categories.query';
 import { CategoriesService } from '../../services/state/categories/categories.service';
 import { CategoriesStore } from '../../services/state/categories/categories.store';
@@ -27,6 +28,7 @@ export class MainComponent implements OnInit, OnDestroy {
     private skusStateService: SkusStateService,
     private skusStateQuery: SkusStateQuery,
     private skusStateStore: SkusStateStore,
+    private cartService: CartService
   ) {
   }
 
@@ -40,7 +42,8 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   addToCart(): void {
-    console.log(this.table.selection.selected);
+    this.cartService.addSkusToCart(this.table.selection.selected);
+    this.table.selection.clear();
   }
 
 }

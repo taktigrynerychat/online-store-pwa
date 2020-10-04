@@ -10,4 +10,6 @@ export class CartQuery extends QueryEntity<CartState> {
     super(store);
   }
 
+  skusFromCart$ = this.selectAll();
+
 }

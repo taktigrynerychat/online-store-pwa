@@ -1,16 +1,21 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CartQuery } from '../../services/state/cart/cart.query';
+import { CartService } from '../../services/state/cart/cart.service';
+import { CartStore } from '../../services/state/cart/cart.store';
 
 @Component({
   selector: 'lol-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CartComponent implements OnInit {
+export class CartComponent {
+  cartSkus$ = this.cartQuery.skusFromCart$;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(
+    private cartService: CartService,
+    private cartStore: CartStore,
+    private cartQuery: CartQuery,
+  ) {
   }
-
 }
