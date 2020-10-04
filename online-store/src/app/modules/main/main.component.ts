@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CategoriesQuery } from '../../services/state/categories/categories.query';
@@ -7,6 +7,7 @@ import { CategoriesStore } from '../../services/state/categories/categories.stor
 import { SkusStateQuery } from '../../services/state/skus/skus-state.query';
 import { SkusStateService } from '../../services/state/skus/skus-state.service';
 import { SkusStateStore } from '../../services/state/skus/skus-state.store';
+import { ItemsTableComponent } from './components/items-table/items-table.component';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { SkusStateStore } from '../../services/state/skus/skus-state.store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit, OnDestroy {
-
+  @ViewChild(ItemsTableComponent, {static: true}) table: ItemsTableComponent;
   private unsub: Subject<any> = new Subject<any>();
 
   constructor(
@@ -36,6 +37,10 @@ export class MainComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unsub.next();
+  }
+
+  addToCart(): void {
+    console.log(this.table.selection.selected);
   }
 
 }

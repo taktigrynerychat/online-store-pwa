@@ -1,6 +1,14 @@
-<section class = "page-card-wrapper">
+<section class="page-card-wrapper">
   <div class="page-card">
-    <h1>HEADER</h1>
+    <div class="main__header main-header">
+      <span class="main-header__title">HEADER</span>
+      <button
+        mat-flat-button
+        (click)="addToCart()"
+        color="accent"
+      >Add to cart
+      </button>
+    </div>
     <div class="main__table">
       <lol-items-table></lol-items-table>
       <div class="main__table-config">
