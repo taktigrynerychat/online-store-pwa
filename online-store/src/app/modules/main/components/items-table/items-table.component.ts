@@ -1,6 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Sku } from '../../../../models/skus.model';
+import { SkusStateQuery } from '../../../../services/state/skus/skus-state.query';
+import { SkusStateService } from '../../../../services/state/skus/skus-state.service';
+import { SkusStateStore } from '../../../../services/state/skus/skus-state.store';
 
 export interface PeriodicElement {
   name: string;
@@ -26,12 +32,32 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'lol-items-table',
   templateUrl: './items-table.component.html',
   styleUrls: ['./items-table.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItemsTableComponent {
+export class ItemsTableComponent implements OnInit, OnDestroy {
+
   displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource: MatTableDataSource<Sku> = new MatTableDataSource<Sku>([]);
+  selection = new SelectionModel<Sku>(true, []);
+
+  private unsub: Subject<any> = new Subject<any>();
+
+  constructor(private skusStateQuery: SkusStateQuery,
+              private cdr: ChangeDetectorRef) {
+  }
+
+  ngOnInit(): void {
+    this.skusStateQuery.filteredSkusTable$
+      .pipe(takeUntil(this.unsub))
+      .subscribe(data => {
+        this.dataSource = data;
+        this.cdr.markForCheck();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsub.next();
+  }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected(): boolean {
@@ -48,10 +74,11 @@ export class ItemsTableComponent {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: PeriodicElement): string {
-    if (!row) {
-      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
-    }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
-  }
+  // checkboxLabel(row?: PeriodicElement): string {
+  //   if (!row) {
+  //     return `${ this.isAllSelected() ? 'select' : 'deselect' } all`;
+  //   }
+  //   return `${ this.selection.isSelected(row) ? 'deselect' : 'select' } row ${ row.position + 1 }`;
+  // }
+
 }

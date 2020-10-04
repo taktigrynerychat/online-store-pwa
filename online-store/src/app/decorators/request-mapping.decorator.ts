@@ -5,7 +5,6 @@ export function RequestMapping(rest?: EndpointMetadata): any {
     const originalMethod = descriptor.value;
 
     descriptor.value = function(...args: any[]): any {
-      console.log(args);
       return originalMethod.apply(
         this,
         [

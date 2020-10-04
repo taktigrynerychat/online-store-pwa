@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { QueryEntity } from '@datorama/akita';
+import { ID, QueryEntity } from '@datorama/akita';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SkuParent, SkuParentChip } from '../../../models/skus.model';
@@ -10,10 +10,11 @@ import { CategoriesState } from './category.model';
 @Injectable({providedIn: 'root'})
 export class CategoriesQuery extends QueryEntity<CategoriesState> {
 
-  constructor(protected store: CategoriesStore,
-              private skusService: SkusService) {
+  constructor(protected store: CategoriesStore) {
     super(store);
   }
+
+  selectedCategories$: Observable<ID[]> = this.select(state => state.selectedChips);
 
   categoriesForChips$: Observable<SkuParentChip[]> = combineLatest(
     [
@@ -22,7 +23,7 @@ export class CategoriesQuery extends QueryEntity<CategoriesState> {
     ],
   ).pipe(
     map(([categories, selected]) => {
-      return categories.map(category => ({...category, selected: selected.includes(category.id)} as SkuParentChip));
+        return categories.map(category => ({...category, selected: selected.includes(category.id)} as SkuParentChip));
       },
     ),
   );
