@@ -1,32 +1,16 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Sku } from '../../../../models/skus.model';
 import { SkusStateQuery } from '../../../../services/state/skus/skus-state.query';
-import { SkusStateService } from '../../../../services/state/skus/skus-state.service';
-import { SkusStateStore } from '../../../../services/state/skus/skus-state.store';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface DisplayedColumn {
+  key: string;
+  title: string;
+  parent?: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'lol-items-table',
@@ -35,8 +19,28 @@ const ELEMENT_DATA: PeriodicElement[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ItemsTableComponent implements OnInit, OnDestroy {
+  noDataMessage: string;
 
-  displayedColumns: string[] = ['select', 'position', 'name', 'weight', 'symbol'];
+  columns: DisplayedColumn[] = [
+    {
+      key: 'name',
+      title: 'SKU name',
+    },
+    {
+      key: 'price',
+      title: 'Price',
+    },
+    {
+      key: 'parent',
+      title: 'Category',
+      parent: 'category.name',
+    },
+    {
+      key: 'lastChange',
+      title: 'Last Change',
+    },
+  ];
+
   dataSource: MatTableDataSource<Sku> = new MatTableDataSource<Sku>([]);
   selection = new SelectionModel<Sku>(true, []);
 
@@ -51,6 +55,7 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsub))
       .subscribe(data => {
         this.dataSource = data;
+        this.noDataMessage = 'OOPS, No data was found :(';
         this.cdr.markForCheck();
       });
   }
@@ -73,12 +78,17 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  /** The label for the checkbox on the passed row */
-  // checkboxLabel(row?: PeriodicElement): string {
-  //   if (!row) {
-  //     return `${ this.isAllSelected() ? 'select' : 'deselect' } all`;
-  //   }
-  //   return `${ this.selection.isSelected(row) ? 'deselect' : 'select' } row ${ row.position + 1 }`;
-  // }
+  getTableKeys(): string[] {
+    return this.columns.map(column => column.key);
+  }
+
+  getParent(sku: Sku, keyString: string): any {
+    const keys = keyString.split('.');
+    let tmp;
+    keys.forEach(key => {
+      tmp = sku[key];
+    });
+    return tmp;
+  }
 
 }

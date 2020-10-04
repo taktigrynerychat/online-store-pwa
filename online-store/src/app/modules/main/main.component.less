@@ -8,22 +8,18 @@
 .main {
   &__table {
     overflow: auto;
-    overflow-x: hidden;
     display: flex;
     flex: 1 1 auto;
+    flex-direction: column;
+    width: calc(100vw - 40px);
 
-    @media @mobile{
-      flex-direction: column;
-    }
-
-    &-config{
+    &-config {
       margin: 10px 0;
       display: flex;
-      flex-basis: 40%;
-
-      @media @mobile {
-        flex: 0 0 auto;
-      }
+      flex: 0 0 auto;
+      overflow: hidden;
     }
   }
 }
+
+
