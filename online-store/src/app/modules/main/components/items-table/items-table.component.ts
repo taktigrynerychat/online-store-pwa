@@ -1,6 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -81,11 +81,15 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
   getCellContent(data: any, column: DisplayedColumn): any {
     if (column.parent) {
       return getChildValue(data, column.parent);
-    } else if (column.key === 'lastChange') {
-      return this.datePipe.transform(data, 'dd.MM.yyy hh:mm');
     } else {
-      return data;
+      switch (column.key) {
+        case 'lastChange':
+          return this.datePipe.transform(data, 'dd.MM.yyy hh:mm');
+        case 'price':
+          return data + '$';
+        default:
+          return data;
+      }
     }
   }
-
 }
