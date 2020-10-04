@@ -34,5 +34,3 @@ export interface SkuUpdate {
   name?: string;
   price?: number;
 }
-
-ex

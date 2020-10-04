@@ -1,3 +1,5 @@
+@import "src/assets/styles/vars.less";
+
 .page {
   &__header {
     grid-area: header;
@@ -8,6 +10,24 @@
   }
 
   &-header {
+
+    &__btns {
+      display: flex;
+      gap: 10px;
+
+      & .mat-primary {
+        background: lighten(@primary, 20);
+      }
+    }
+
+    &__link {
+      &.active {
+        & .mat-primary {
+          background: @primary;
+        }
+      }
+    }
+
     &__logo {
       font-family: sequel, @font-family;
       font-size: 20px;

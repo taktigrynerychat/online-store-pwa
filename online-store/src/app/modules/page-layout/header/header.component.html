@@ -3,17 +3,39 @@
   class="page-header__logo"
   [attr.text]="logo"
 >{{logo}}</a>
-<a routerLink="cart">
-  <button
-    mat-mini-fab
-    color="primary"
-    aria-label="Example icon button with a filter list icon"
+<div class="page-header__btns">
+  <a
+    routerLink="main"
+    routerLinkActive="active"
+    class="page-header__link"
   >
-    <mat-icon
-      aria-hidden="false"
-      class="icon _white"
-    >shopping_cart
-    </mat-icon>
-  </button>
-</a>
+    <button
+      mat-mini-fab
+      color="primary"
+    >
+      <mat-icon
+        aria-hidden="false"
+        class="icon _white"
+      >home
+      </mat-icon>
+    </button>
+  </a>
+  <a
+    routerLink="cart"
+    routerLinkActive="active"
+    class="page-header__link"
+  >
+    <button
+      mat-mini-fab
+      color="primary"
+    >
+      <mat-icon
+        aria-hidden="false"
+        class="icon _white"
+      >shopping_cart
+      </mat-icon>
+    </button>
+  </a>
+</div>
+
 
