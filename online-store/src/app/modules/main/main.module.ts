@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { MainRoutingModule } from './main-routing.module';
@@ -18,6 +19,7 @@ import { ItemsTableConfigComponent } from './components/items-table-config/items
     MatTableModule,
     MatCheckboxModule,
     MatChipsModule,
+    MatSortModule,
   ],
 })
 export class MainModule { }

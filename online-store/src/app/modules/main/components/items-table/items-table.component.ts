@@ -1,16 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { SKUS_TABLE_COLUMNS } from '../../../../constants/table.constants';
 import { Sku } from '../../../../models/skus.model';
+import { DisplayedColumn } from '../../../../models/table.model';
 import { SkusStateQuery } from '../../../../services/state/skus/skus-state.query';
-
-export interface DisplayedColumn {
-  key: string;
-  title: string;
-  parent?: string;
-}
 
 @Component({
   selector: 'lol-items-table',
@@ -18,29 +15,11 @@ export interface DisplayedColumn {
   styleUrls: ['./items-table.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ItemsTableComponent implements OnInit, OnDestroy {
+export class ItemsTableComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @ViewChild(MatSort) sort: MatSort;
   noDataMessage: string;
-
-  columns: DisplayedColumn[] = [
-    {
-      key: 'name',
-      title: 'SKU name',
-    },
-    {
-      key: 'price',
-      title: 'Price',
-    },
-    {
-      key: 'parent',
-      title: 'Category',
-      parent: 'category.name',
-    },
-    {
-      key: 'lastChange',
-      title: 'Last Change',
-    },
-  ];
-
+  columns: DisplayedColumn[] = SKUS_TABLE_COLUMNS;
   dataSource: MatTableDataSource<Sku> = new MatTableDataSource<Sku>([]);
   selection = new SelectionModel<Sku>(true, []);
 
@@ -58,6 +37,11 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
         this.noDataMessage = 'OOPS, No data was found :(';
         this.cdr.markForCheck();
       });
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.sort);
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
@@ -78,8 +62,19 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
+  checkboxLabel(row?: Sku): string {
+    if (!row) {
+      return `${ this.isAllSelected() ? 'select' : 'deselect' } all`;
+    }
+    return `${ this.selection.isSelected(row) ? 'deselect' : 'select' } row ${ +row.id + 1 }`;
+  }
+
+  sortChange(e: Sort): void{
+    console.log('sort change', e);
+  }
+
   getTableKeys(): string[] {
-    return this.columns.map(column => column.key);
+    return ['select', ...this.columns.map(column => column.key)];
   }
 
   getParent(sku: Sku, keyString: string): any {
