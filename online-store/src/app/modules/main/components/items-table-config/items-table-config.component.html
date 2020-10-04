@@ -4,6 +4,7 @@
   <mat-chip
     *ngFor="let category of categories$ | async"
     [selected]="category.selected"
+    (click)="selectChip(category.id)"
   >
     {{ category.name || '№' + category.id}}
   </mat-chip>

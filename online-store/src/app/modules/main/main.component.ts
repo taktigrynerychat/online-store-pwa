@@ -1,6 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { CategoriesService } from '../../services/state/categories/categories.service';
 
 
 
