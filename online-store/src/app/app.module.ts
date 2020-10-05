@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
@@ -29,7 +29,7 @@ import { SkusService } from './services/api/skus.service';
     MatButtonModule,
     PageLayoutModule
   ],
-  providers: [SkusService, DatePipe],
+  providers: [SkusService, DatePipe, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
