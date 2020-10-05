@@ -30,7 +30,8 @@
   "dataGroups": [
     {
       "urls": [
-        "http://ssdev.superagent.ru/TestApp/Values/**"
+        "http://ssdev.superagent.ru/TestApp/Values/GetAll",
+        "http://ssdev.superagent.ru/TestApp/Values/GetParents"
       ],
       "name": "Values",
       "cacheConfig": {
