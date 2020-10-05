@@ -28,8 +28,9 @@
           >
             <span class="cart-card__name">{{ sku.name }}</span>
             <div class="cart-card__content cart-card-content">
-              <span class="cart-card-content__price">{{ sku.price | currency: '$' }}</span>
-              <mat-icon class="cart-card-content__delete icon _gray" (click)="deleteSku(sku.id)">delete</mat-icon>
+              <lol-key-value-table [table]="getCardTable(sku)"></lol-key-value-table>
+              <mat-icon class="cart-card-content__delete icon _gray"
+                (click)="deleteSku(sku.id)">delete</mat-icon>
             </div>
           </div>
         </div>

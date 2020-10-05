@@ -7,10 +7,11 @@ import { RouterModule } from '@angular/router';
 import { PageLayoutComponent } from './page-layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { KeyValueTableComponent } from './key-value-table/key-value-table.component';
 
 
 @NgModule({
-  declarations: [PageLayoutComponent, HeaderComponent, FooterComponent],
+  declarations: [PageLayoutComponent, HeaderComponent, FooterComponent, KeyValueTableComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -20,6 +21,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   exports: [
     PageLayoutComponent,
+    KeyValueTableComponent
   ],
 })
 export class PageLayoutModule {

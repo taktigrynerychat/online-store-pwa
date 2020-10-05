@@ -1,0 +1,20 @@
+@cell-color: #857c94;
+
+:host{
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: auto;
+  gap: 5px;
+  padding: 5px;
+}
+.key-value{
+  &__item{
+    display: flex;
+    align-items: center;
+    color: @cell-color;
+
+    &:nth-child(odd){
+      color: darken(@cell-color, 30);
+    }
+  }
+}
