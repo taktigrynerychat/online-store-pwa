@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CartQuery } from '../../../services/state/cart/cart.query';
 
 @Component({
   selector: 'lol-header',
@@ -6,10 +7,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit {
-
   logo = 'store';
-
-  constructor() {
+  skusCount$ = this.cartQuery.cartSkusCount$;
+  constructor(private cartQuery: CartQuery) {
   }
 
   ngOnInit(): void {

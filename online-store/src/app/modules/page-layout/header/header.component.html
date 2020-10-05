@@ -24,6 +24,11 @@
     routerLink="cart"
     routerLinkActive="active"
     class="page-header__link"
+    [matBadge]="skusCount$ | async"
+    matBadgePosition="after"
+    matBadgeColor="accent"
+    matBadgeSize="small"
+    [matBadgeHidden] = "!(skusCount$ | async)"
   >
     <button
       mat-mini-fab
