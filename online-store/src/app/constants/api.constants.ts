@@ -1,6 +1,6 @@
 import { Endpoints } from '../models/api.model';
 
-export enum SkusEndpoints {
+export enum SkusEndpointsPaths {
   GET_ALL = 'GetAll',
   GET_FILTERED = 'GetFiltered',
   GET_BY_ID = 'GetById/{id}',
@@ -14,31 +14,31 @@ export enum ApiMethods {
   POST = 'POST'
 }
 
-export const apiEndpoints: Endpoints = {
+export const SkusEndpoints: Endpoints = {
   getAll: {
-    path: SkusEndpoints.GET_ALL,
+    path: SkusEndpointsPaths.GET_ALL,
     method: ApiMethods.GET
   },
   getFiltered: {
-    path: SkusEndpoints.GET_FILTERED,
+    path: SkusEndpointsPaths.GET_FILTERED,
     method: ApiMethods.POST
   },
   getById: {
-    path: SkusEndpoints.GET_BY_ID,
+    path: SkusEndpointsPaths.GET_BY_ID,
     method: ApiMethods.GET,
     resolveUrl: true
   },
   update: {
-    path: SkusEndpoints.UPDATE,
+    path: SkusEndpointsPaths.UPDATE,
     method: ApiMethods.POST,
     resolveUrl: true
   },
   getWithParent: {
-    path: SkusEndpoints.GET_WITH_PARENT,
+    path: SkusEndpointsPaths.GET_WITH_PARENT,
     method: ApiMethods.GET
   },
   getParents: {
-    path: SkusEndpoints.GET_PARENTS,
+    path: SkusEndpointsPaths.GET_PARENTS,
     method: ApiMethods.GET
   }
 };

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { apiEndpoints } from '../../constants/api.constants';
+import { SkusEndpoints } from '../../constants/api.constants';
 import { Controller } from '../../decorators/controller.decorator';
 import { RequestMapping } from '../../decorators/request-mapping.decorator';
 import { RequestData } from '../../models/api.model';
@@ -33,32 +33,32 @@ export class SkusService extends SkusServiceAbstract {
     super();
   }
 
-  @RequestMapping(apiEndpoints.getAll)
+  @RequestMapping(SkusEndpoints.getAll)
   getAll(requestData: RequestData = {}): Observable<Sku[]> {
     return this.http.getResponse<Sku[]>(requestData).pipe(map(r => r.body));
   }
 
-  @RequestMapping(apiEndpoints.getFiltered)
+  @RequestMapping(SkusEndpoints.getFiltered)
   getFilteredSkus(requestData: RequestData<SkuFilter>): Observable<Sku[]> {
     return this.http.getResponse<Sku[], SkuFilter>(requestData, requestData.paramKeys).pipe(map(r => r.body));
   }
 
-  @RequestMapping(apiEndpoints.getById)
+  @RequestMapping(SkusEndpoints.getById)
   getSkuById(requestData: RequestData<{ id: ID }>): Observable<Sku> {
     return this.http.getResponse<Sku>(requestData).pipe(map(r => r.body));
   }
 
-  @RequestMapping(apiEndpoints.update)
+  @RequestMapping(SkusEndpoints.update)
   updateSku(requestData: RequestData<SkuUpdate>): Observable<number> {
     return this.http.getResponse<Sku, SkuUpdate>(requestData, ['name', 'price']).pipe(map(r => r.status));
   }
 
-  @RequestMapping(apiEndpoints.getParents)
+  @RequestMapping(SkusEndpoints.getParents)
   getParents(requestData: RequestData = {}): Observable<SkuParent[]> {
     return this.http.getResponse<SkuParent[]>(requestData).pipe(map(r => r.body));
   }
 
-  @RequestMapping(apiEndpoints.getWithParent)
+  @RequestMapping(SkusEndpoints.getWithParent)
   getWithParent(requestData: RequestData = {}): Observable<SkusWithParent[]> {
     return this.http.getResponse<SkusWithParent[]>(requestData).pipe(map(r => r.body));
   }
