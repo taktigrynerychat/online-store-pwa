@@ -11,6 +11,7 @@ import { CartStore } from '../../services/state/cart/cart.store';
 })
 export class CartComponent {
   cartSkus$ = this.cartQuery.skusFromCart$;
+  total$ = this.cartQuery.totalCost$;
 
   constructor(
     private cartService: CartService,

@@ -2,11 +2,16 @@
   <div class="page-card">
     <div class="header">
       <span class="header__text">cart</span>
-      <button
+      <div class="cart__header cart-header">
+        <div>
+          <span class="cart-header__price _sequel">{{ total$ | async | currency : '$'}}</span>
+        </div>
+        <button
         mat-stroked-button
         (click)="deleteAll()"
       >Delete all
       </button>
+      </div>
     </div>
     <div class="cart-wrapper" style="overflow: auto">
       <div class="cart">
