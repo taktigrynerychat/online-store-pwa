@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ID } from '@datorama/akita';
 import { CartQuery } from '../../services/state/cart/cart.query';
 import { CartService } from '../../services/state/cart/cart.service';
 import { CartStore } from '../../services/state/cart/cart.store';
@@ -22,5 +23,9 @@ export class CartComponent {
 
   deleteAll(): void {
     this.cartService.deleteAllSkusFromCart();
+  }
+
+  deleteSku(id: ID): void {
+    this.cartService.deleteSkuFromCart(id);
   }
 }
