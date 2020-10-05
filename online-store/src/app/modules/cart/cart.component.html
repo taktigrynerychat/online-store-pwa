@@ -15,7 +15,10 @@
           *ngFor="let sku of cartSkus$ | async"
         >
           <span class = "cart-card__name">{{ sku.name }}</span>
-          <span class = "cart-card__content">{{ sku.price }}$</span>
+          <div class = "cart-card__content cart-card-content">
+            <span class="cart-card-content__price">{{ sku.price }}$</span>
+            <mat-icon class="cart-card-content__delete icon _gray">delete</mat-icon>
+          </div>
         </div>
       </div>
     </div>

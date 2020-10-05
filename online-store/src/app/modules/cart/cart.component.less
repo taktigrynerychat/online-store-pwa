@@ -1,4 +1,5 @@
 @import "src/assets/styles/vars.less";
+
 @card-size: 200px;
 
 :host {
@@ -20,7 +21,7 @@
   }
 
   &-card {
-    &__name{
+    &__name {
       padding: 10px 20px 10px 15px;
       color: darken(@primary, 30);
       font-size: 14px;
@@ -28,9 +29,26 @@
       align-items: center;
     }
 
-    &__content{
+    &__content {
       background: #fafafa;
       margin: 0 6px 6px 6px;
+      position: relative;
+
+      &:hover {
+        .cart-card-content__delete {
+          opacity: 1;
+        }
+      }
+    }
+
+    &-content {
+      &__delete {
+        opacity: 0;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        transition: .2s;
+      }
     }
   }
 }
