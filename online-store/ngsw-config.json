@@ -26,5 +26,19 @@
         ]
       }
     }
+  ],
+  "dataGroups": [
+    {
+      "urls": [
+        "http://ssdev.superagent.ru/TestApp/Values/**"
+      ],
+      "name": "Values",
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 200,
+        "maxAge": "2h",
+        "timeout": "5s"
+      }
+    }
   ]
 }
