@@ -20,11 +20,12 @@
     align-items: center;
   }
 
-  &-header{
-    &__total{
+  &-header {
+    &__total {
 
     }
-    &__price{
+
+    &__price {
       color: transparent;
       -webkit-text-stroke: 1px lighten(@primary, 40);
       font-size: 20px;
@@ -35,6 +36,45 @@
     display: grid;
     grid-template-rows: 60px auto;
     box-shadow: 0px 1px 1px rgba(4, 10, 21, 0.04), 0px 3px 14px rgba(4, 12, 29, 0.09), 0px 0px 1px rgba(7, 13, 26, 0.27);
+  }
+
+  &__no-items {
+    display: flex;
+    flex: 1 1 auto;
+    height: calc(100vh - 171px);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &-no-items {
+    &__link {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+
+      & .icon{
+        transition: .2s;
+      }
+
+      &:hover {
+        & .cart-no-items__text, .icon {
+          color: @primary;
+        }
+      }
+    }
+
+    &__text {
+      color: gainsboro;
+      font-size: 16px;
+      cursor: pointer;
+      transition: .2s;
+
+      &._large {
+        font-size: 1.5em;
+      }
+
+    }
   }
 
   &-card {

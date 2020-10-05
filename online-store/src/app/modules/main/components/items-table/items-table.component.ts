@@ -1,5 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { DatePipe } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
@@ -27,7 +27,8 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
 
   constructor(private skusStateQuery: SkusStateQuery,
               private cdr: ChangeDetectorRef,
-              private datePipe: DatePipe) {
+              private datePipe: DatePipe,
+              private currencyPipe: CurrencyPipe) {
   }
 
   ngOnInit(): void {
@@ -86,7 +87,7 @@ export class ItemsTableComponent implements OnInit, OnDestroy {
         case 'lastChange':
           return this.datePipe.transform(data, 'dd.MM.yyy hh:mm');
         case 'price':
-          return data + '$';
+          return this.currencyPipe.transform(data, '$');
         default:
           return data;
       }

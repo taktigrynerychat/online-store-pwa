@@ -7,25 +7,42 @@
           <span class="cart-header__price _sequel">{{ total$ | async | currency : '$'}}</span>
         </div>
         <button
-        mat-stroked-button
-        (click)="deleteAll()"
-      >Delete all
-      </button>
+          mat-stroked-button
+          (click)="deleteAll()"
+        >Delete all
+        </button>
       </div>
     </div>
-    <div class="cart-wrapper" style="overflow: auto">
-      <div class="cart">
+    <div
+      class="cart-wrapper"
+      style="overflow: auto"
+    >
+      <ng-container *ngIf="cartSkus$ | async as skus">
         <div
-          class="cart__card cart-card"
-          *ngFor="let sku of cartSkus$ | async"
+          class="cart"
+          *ngIf="skus.length; else noItems"
         >
-          <span class = "cart-card__name">{{ sku.name }}</span>
-          <div class = "cart-card__content cart-card-content">
-            <span class="cart-card-content__price">{{ sku.price }}$</span>
-            <mat-icon class="cart-card-content__delete icon _gray">delete</mat-icon>
+          <div
+            class="cart__card cart-card"
+            *ngFor="let sku of skus"
+          >
+            <span class="cart-card__name">{{ sku.name }}</span>
+            <div class="cart-card__content cart-card-content">
+              <span class="cart-card-content__price">{{ sku.price | currency: '$' }}</span>
+              <mat-icon class="cart-card-content__delete icon _gray">delete</mat-icon>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
+      <ng-template #noItems>
+        <div class="cart__no-items cart-no-items">
+          <span class="cart-no-items__text _large">nothing is here</span>
+          <a class="cart-no-items__link" routerLink="/">
+            <span class="cart-no-items__text">go to item's list</span>
+            <mat-icon class = "icon _gray">link</mat-icon>
+          </a>
+        </div>
+      </ng-template>
     </div>
 
   </div>
