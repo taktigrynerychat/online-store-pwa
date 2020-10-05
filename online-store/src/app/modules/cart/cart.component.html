@@ -3,8 +3,7 @@
     <div class="header">
       <span class="header__text">cart</span>
       <button
-        mat-flat-button
-        color="warn"
+        mat-stroked-button
         (click)="deleteAll()"
       >Delete all
       </button>
@@ -16,7 +15,7 @@
           *ngFor="let sku of cartSkus$ | async"
         >
           <span class = "cart-card__name">{{ sku.name }}</span>
-          <span class = "cart-card__price">{{ sku.price }}$</span>
+          <span class = "cart-card__content">{{ sku.price }}$</span>
         </div>
       </div>
     </div>
